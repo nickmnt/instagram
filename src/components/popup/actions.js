@@ -2,8 +2,9 @@ import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import UserContext from '../../context/user';
 import {addUserToLikes,removeUserFromLikes} from '../../services/firebase';
+import {formatDistance} from 'date-fns';
 
-export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) {
+export default function Actions({ docId, totalLikes, likedPhoto, handleFocus, datePosted }) {
   const {
     user: { uid: userId }
   } = useContext(UserContext);
@@ -70,6 +71,9 @@ export default function Actions({ docId, totalLikes, likedPhoto, handleFocus }) 
       <div className="actions__likes">
         <p className="actions__likes-text">{likes === 1 ? `${likes} like` : `${likes} likes`}</p>
       </div>
+      <p className="comments__date">
+          {formatDistance(datePosted, new Date())} ago
+        </p>
     </div>
   );
 }

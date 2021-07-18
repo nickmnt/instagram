@@ -14,11 +14,11 @@ export default function Dashboard({ user: loggedInUser }) {
 
   return (
     <LoggedInUserContext.Provider value={{ user, setActiveUser }}>
-      <div className="bg-gray-background">
+      <div className="dashboard">
         <Header />
-        <div className="grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg">
-          <Timeline />
-          <Sidebar />
+        <div className="dashboard__container">
+          <Timeline className="dashboard__timeline"/>
+          <Sidebar className="dashboard__sidebar"/>
         </div>
       </div>
     </LoggedInUserContext.Provider>

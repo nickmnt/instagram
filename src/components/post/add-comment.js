@@ -1,19 +1,21 @@
 import { useState, useContext } from 'react';
 import PropTypes from 'prop-types';
 import FirebaseContext from '../../context/firebase';
-import UserContext from '../../context/user';
+import LoggedInUserContext from '../../context/logged-in-user';
 
 export default function AddComment({ docId, comments, setComments, commentInput }) {
   const [comment, setComment] = useState('');
   const { firebase, FieldValue } = useContext(FirebaseContext);
-  const {
-    user: { displayName }
-  } = useContext(UserContext);
+  const { user: { username:displayName } = {} } = useContext(
+    LoggedInUserContext
+  );
+
 
   const handleSubmitComment = (event) => {
     event.preventDefault();
 
     setComments([...comments, { displayName, comment }]);
+    console.log(comments);
     setComment('');
 
     return firebase
@@ -26,9 +28,9 @@ export default function AddComment({ docId, comments, setComments, commentInput 
   };
 
   return (
-    <div className="border-t border-gray-primary">
+    <div className="add-comment">
       <form
-        className="flex justify-between pl-0 pr-5"
+        className="add-comment__form"
         method="POST"
         onSubmit={(event) =>
           comment.length >= 1 ? handleSubmitComment(event) : event.preventDefault()
@@ -37,7 +39,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
         <input
           aria-label="Add a comment"
           autoComplete="off"
-          className="text-sm text-gray-base w-full mr-3 py-5 px-4"
+          className="add-comment__input"
           type="text"
           name="add-comment"
           placeholder="Add a comment..."
@@ -46,7 +48,7 @@ export default function AddComment({ docId, comments, setComments, commentInput 
           ref={commentInput}
         />
         <button
-          className={`text-sm font-bold text-blue-medium ${!comment && 'opacity-25'}`}
+          className={`btn-simple add-comment__btn ${!comment && 'add-comment__btn--off'}`}
           type="button"
           disabled={comment.length < 1}
           onClick={handleSubmitComment}

@@ -1,0 +1,17 @@
+.dashboard {
+    background-color: $color-grey-default;
+
+    &__container {
+        display: grid;
+        grid-template-columns: 20vw [timeline-start] 1fr 1fr [timeline-end] 10rem [sidebar-start] 1fr [sidebar-end] 20vw;
+    }
+
+    &__timeline {
+        grid-column: timeline-start / timeline-end;
+    }
+
+    &__sidebar {
+        margin-top: 4rem;
+        grid-column: sidebar-start / sidebar-end;
+    }
+}

@@ -13,19 +13,19 @@ export default function Comments({ docId, comments: allComments, posted, comment
   };
 
   return (
-    <>
-      <div className="p-4 pt-1 pb-4">
+    <div className="comments">
+      <div className="comments__container">
         {comments.slice(0, commentsSlice).map((item) => (
-          <p key={`${item.comment}-${item.displayName}`} className="mb-1">
-            <Link to={`/p/${item.displayName}`}>
-              <span className="mr-1 font-bold">{item.displayName}</span>
+          <p key={`${item.comment}-${item.displayName}`} className="comments__comment">
+            <Link to={`/p/${item.displayName}`} className="comments__link">
+              <span className="comments__name">{item.displayName}</span>
             </Link>
-            <span>{item.comment}</span>
+            <span className="comments__comment-txt">{item.comment}</span>
           </p>
         ))}
         {comments.length >= 3 && commentsSlice < comments.length && (
           <button
-            className="text-sm text-gray-base mb-1 cursor-pointer focus:outline-none"
+            className="btn"
             type="button"
             onClick={showNextComments}
             onKeyDown={(event) => {
@@ -37,7 +37,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
             View more comments
           </button>
         )}
-        <p className="text-gray-base uppercase text-xs mt-2">
+        <p className="comments__date">
           {formatDistance(posted, new Date())} ago
         </p>
       </div>
@@ -47,7 +47,7 @@ export default function Comments({ docId, comments: allComments, posted, comment
         setComments={setComments}
         commentInput={commentInput}
       />
-    </>
+    </div>
   );
 }
 

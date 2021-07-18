@@ -1,0 +1,24 @@
+@import "./abstracts/variables";
+
+@import "./components/buttons";
+@import "./components/loader";
+@import "./components/header";
+@import "./components/p-header";
+@import "./components/post";
+@import "./components/actions";
+@import "./components/footer";
+@import "./components/comments";
+@import "./components/add-comment";
+@import "./components/user";
+@import "./components/suggestions";
+@import "./components/sug-profile";
+@import "./components/prof-header";
+@import "./components/photos";
+@import "./components/popup";
+@import "./components/comment";
+
+
+@import "./base/base";
+
+@import './pages/login';
+@import './pages/dashboard';

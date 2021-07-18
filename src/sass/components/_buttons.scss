@@ -1,0 +1,16 @@
+.btn {
+    text-decoration: none;
+    background-color: $color-blue;
+    color: $color-white;
+    border-radius: 0.4rem;
+    font-weight: bold;
+    border-style: none;
+    height: 2.7rem;
+}
+
+.btn-simple {
+    background-color: transparent;
+    text-decoration: none;
+    border: none;
+    color: $color-blue;
+}

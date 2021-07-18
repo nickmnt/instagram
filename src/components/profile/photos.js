@@ -1,20 +1,57 @@
 /* eslint-disable no-nested-ternary */
+import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
+import Popup from '../popup';
 
-export default function Photos({ photos }) {
+export default function Photos({ username, photos }) {
+  const [content, setContent] = useState(null);
+
+  const handlePhotoClick = (photo) => {
+    setContent(photo);
+  }
+
+  const close = () => {
+    setContent(null);
+  }
+
+  const handleClick = (event) => {
+        if (
+          content && (event.target.matches(".popup__close") ||
+          !event.target.closest(".popup__container"))
+        ) {
+          close()
+        }
+  }
+
+  //Popup event handler
+  useEffect(() => {
+    
+    document.addEventListener(
+      "click",
+      handleClick
+    )
+    
+    return () => {
+      document.removeEventListener('click', handleClick);
+    };
+
+    
+  },[content]);
+
   return (
-    <div className="h-16 border-t border-gray-primary mt-12 pt-4">
-      <div className="grid grid-cols-3 gap-8 mt-4 mb-12">
+    <>
+    <div className="photos">
+      <div className="photos__container">
         {!photos
           ? new Array(12).fill(0).map((_, i) => <Skeleton key={i} width={320} height={400} />)
           : photos.length > 0
           ? photos.map((photo) => (
-              <div key={photo.docId} className="relative group">
-                <img src={photo.imageSrc} alt={photo.caption} />
+              <div key={photo.docId} className="photos__photo" onClick={() => handlePhotoClick(photo)}>
+                <img src={photo.imageSrc} alt={photo.caption} className="photos__img"/>
 
-                <div className="absolute bottom-0 left-0 bg-gray-200 z-10 w-full justify-evenly items-center h-full bg-black-faded group-hover:flex hidden">
-                  <p className="flex items-center text-white font-bold">
+                <div className="photos__stats">
+                  <p className="photos__likes">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -30,7 +67,7 @@ export default function Photos({ photos }) {
                     {photo.likes.length}
                   </p>
 
-                  <p className="flex items-center text-white font-bold">
+                  <p className="photos__comments">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
@@ -51,8 +88,15 @@ export default function Photos({ photos }) {
           : null}
       </div>
 
-      {!photos || (photos.length === 0 && <p className="text-center text-2xl">No Posts Yet</p>)}
+      {!photos || (photos.length === 0 && <p className="photos__none">No Posts Yet</p>)}
     </div>
+      {
+        (content) && <>
+        <a onClick={close} className="popup__close">&times;</a>
+        <Popup username={username} caption={content.docId} content={content} onClick={close}/>
+        </>
+      }
+    </>
   );
 }
 

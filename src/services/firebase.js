@@ -172,3 +172,33 @@ export async function toggleFollow(
   // 3rd param: is the user following this profile? e.g. does karl follow raphael? (true/false)
   await updateFollowedUserFollowers(profileDocId, followingUserId, isFollowingProfile);
 }
+
+/**
+ * Adds the user to the list of likes for the docId (pointing to the post)
+ * @param {string} docId 
+ * @param {*} userId 
+ */
+export async function addUserToLikes(docId, userId) {
+  await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .update({
+      likes: FieldValue.arrayUnion(userId)
+    });
+};
+
+/**
+ * Removes the user from the list of likes for the docId (pointing to the post)
+ * @param {string} docId 
+ * @param {*} userId 
+ */
+export async function removeUserFromLikes(docId, userId) {
+  await firebase
+    .firestore()
+    .collection('photos')
+    .doc(docId)
+    .update({
+      likes: FieldValue.arrayRemove(userId)
+    });
+};
