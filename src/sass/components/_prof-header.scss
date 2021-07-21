@@ -18,7 +18,7 @@
 
     &__mid {
         
-        //margin-top: 2rem;
+        margin-top: 5rem;
         //align-self: normal;
         transform: translateY(-3rem);
         grid-column: mid-start / mid-end; 
@@ -69,10 +69,16 @@
 
         font-size: 1.5rem;
         font-weight: 600;
+        margin-bottom: .5rem;
         
         &-container {
             margin-top: 2rem;
         }
+    }
+
+    &__bio {
+        font-size: 1.5rem;
+        font-weight: 400;
     }
 
 

@@ -8,3 +8,4 @@ export const CHANGE_PASSWORD = '/accounts/password/change';
 export const PUSH_NOTIFICATIONS = '/push/web/settings'; 
 export const PRIVACY_AND_SECURITY = '/accounts/privacy_and_security';
 export const LOGIN_ACTIVITY = '/session/login_activity';
+export const POST = '/post';

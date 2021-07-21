@@ -3,6 +3,7 @@ import {useState, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import Comment from './comment';
 import Actions from './actions';
+import Header from '../post/header';
 
 //User name is the username of the user that posted, content is the content of the post
 export default function Popup({username, content}) {
@@ -25,7 +26,7 @@ export default function Popup({username, content}) {
 
                 <div className="popup__header">
                     
-                        <Link to={`/p/${username}`} className="popup__header-link">
+                        {/*<Link to={`/p/${username}`} className="popup__header-link">
                             <img
                                 src={`/images/avatars/${username}.jpg`}
                                 alt={`${username} profile picture`}
@@ -33,6 +34,8 @@ export default function Popup({username, content}) {
                             />
                             <p className="popup__header-text">{username}</p>
                         </Link>
+                        */}
+                        <Header username={username} className="popup__header-link"/>
 
                 </div>
 

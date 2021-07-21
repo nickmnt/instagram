@@ -26,7 +26,7 @@ export default function Profile({ user }) {
   }, [user.username]);
 
   return (
-    <>
+    <div className="profile">
       <Header
         photosCount={photosCollection ? photosCollection.length : 0}
         profile={profile}
@@ -34,7 +34,7 @@ export default function Profile({ user }) {
         setFollowerCount={dispatch}
       />
       <Photos username={profile.username} photos={photosCollection} />
-    </>
+    </div>
   );
 }
 

@@ -2,9 +2,11 @@ import Header from '../components/header';
 
 export default function PageTemplate({children}) {
     return (
-        <>
+        <div className="page">
             <Header />
-            {children}
-        </>
+            <div className="page__container">
+                {children}
+            </div>
+        </div>
     )
 }

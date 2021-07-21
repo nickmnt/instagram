@@ -1,6 +1,10 @@
 // Post header
 .p-header {
 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
     //border: 1px solid $color-grey-light;
     background-color: $color-white;
     width: 100%;
@@ -28,5 +32,18 @@
         margin-left: 1.5rem;
         font-weight: 600;
         font-size: 1.4rem;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+        &:active {
+            opacity: 0.5;
+        }
+    }
+
+    &__more {
+        cursor: pointer;
+        margin-right: 1.5rem;
     }
 }

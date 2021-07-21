@@ -3,7 +3,7 @@
 
     &__container {
         display: grid;
-        grid-template-columns: 20vw [timeline-start] 1fr 1fr [timeline-end] 10rem [sidebar-start] 1fr [sidebar-end] 20vw;
+        grid-template-columns: 20vw [timeline-start] 1fr 1fr [timeline-end] 3rem [sidebar-start] 1fr [sidebar-end] 20vw;
     }
 
     &__timeline {

@@ -5,6 +5,7 @@ import Timeline from '../components/timeline';
 import Sidebar from '../components/sidebar';
 import useUser from '../hooks/use-user';
 import LoggedInUserContext from '../context/logged-in-user';
+import PageTemplate from '../templates/page-template';
 
 export default function Dashboard({ user: loggedInUser }) {
   const { user, setActiveUser } = useUser(loggedInUser.uid);
@@ -14,13 +15,14 @@ export default function Dashboard({ user: loggedInUser }) {
 
   return (
     <LoggedInUserContext.Provider value={{ user, setActiveUser }}>
-      <div className="dashboard">
-        <Header />
-        <div className="dashboard__container">
-          <Timeline className="dashboard__timeline"/>
-          <Sidebar className="dashboard__sidebar"/>
+      <PageTemplate>
+        <div className="dashboard">
+          <div className="dashboard__container">
+            <Timeline className="dashboard__timeline"/>
+            <Sidebar className="dashboard__sidebar"/>
+          </div>
         </div>
-      </div>
+      </PageTemplate>
     </LoggedInUserContext.Provider>
   );
 }

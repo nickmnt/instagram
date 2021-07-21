@@ -202,3 +202,74 @@ export async function removeUserFromLikes(docId, userId) {
       likes: FieldValue.arrayRemove(userId)
     });
 };
+
+export async function searchForTerm(term) {
+  const result = await firebase
+    .firestore()
+    .collection('users')
+    .orderBy('username').startAt(term).endAt(term + '~')
+    .limit(20)
+    .get();
+
+    //console.log('Result',result);
+
+  const modifiedList = result.docs.map((item) => ({
+    ...item.data(),
+    docId: item.id
+  }));
+
+  //console.log('modifiedList', modifiedList);
+
+  return modifiedList;
+}
+
+export async function updateUserDetails(
+  loggedInUserDocId, // currently logged in user document id
+  fullName,
+  username,
+  website,
+  bio,
+  phoneNumber,
+  gender
+) {
+  let success = false;
+  try {
+  await firebase
+    .firestore()
+    .collection('users')
+    .doc(loggedInUserDocId)
+    .update({
+      fullName: fullName,
+      username: username,
+      website: website,
+      bio: bio,
+      phoneNumber: phoneNumber,
+      gender: gender
+    });
+    success = true;
+  } catch (err) {
+
+  }
+  return success;
+}
+
+/**
+ * 
+ * @param {string} emailAddress The email address
+ * @param {string} oldPassword The old password 
+ * @param {string} newPassword The new password
+ */
+export async function changePassword(emailAddress, oldPassword, newPassword) {
+  let success = false;
+
+  try {
+    await firebase.auth().signInWithEmailAndPassword(emailAddress, oldPassword)
+    //success = false;      
+    await firebase.auth().currentUser.updatePassword(newPassword);
+    success = true;
+  }
+  catch(err) {
+    success = false;
+  }
+  return success;
+}

@@ -6,6 +6,8 @@ import useUser from '../../hooks/use-user';
 import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import {Link} from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
 
 export default function Header({
   photosCount,
@@ -17,7 +19,8 @@ export default function Header({
     fullName,
     followers,
     following,
-    username: profileUsername
+    username: profileUsername,
+    bio
   }
 }) {
   const { user: loggedInUser } = useContext(UserContext);
@@ -81,6 +84,11 @@ export default function Header({
               </button>
             )
           )}
+          {(!activeBtnFollow && activeBtnFollow !== undefined )&&
+          <Link role="button"
+            className="btn-edit"
+            to={ROUTES.EDIT_PROFILE}
+          >Edit Profile</Link>}
         </div>
         <div className="prof-header__info">
           {!followers || !following ? (
@@ -103,6 +111,7 @@ export default function Header({
         </div>
         <div className="prof-header__name-container">
           <p className="prof-header__name">{!fullName ? <Skeleton count={1} height={24} /> : fullName}</p>
+          <p className="prof-header__bio">{bio === undefined ? <Skeleton count={1} height={24} /> : bio}</p>
         </div>
       </div>
     </div>
