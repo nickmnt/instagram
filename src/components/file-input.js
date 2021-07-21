@@ -1,14 +1,15 @@
 
-export default function FileInput() {
-
+export default function FileInput({setImg}) {
     const handleChange = e => {
-        console.log(e.target.files);
+        if(e.target.files[0]) {
+            setImg(e.target.files[0]);
+        }
     };
 
     return (
 
         <div class="file-input">
-            <input type="file" id="file" class="file-input__input"
+            <input type="file" id="file" className="file-input__input"
                 accept="image/png, image/jpeg" onChange={handleChange} />
                 <label htmlFor="file">
                     Select file
