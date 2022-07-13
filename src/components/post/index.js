@@ -1,20 +1,31 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Header from './header';
 import Actions from './actions';
 import Footer from './footer';
 import Comments from './comments';
+import { firebase } from '../../lib/firebase';
+import 'firebase/storage';
+import Skeleton from 'react-loading-skeleton';
 
 export default function Post({ content }) {
   const commentInput = useRef(null);
   const handleFocus = () => commentInput.current.focus();
+  const [imgUrl, setImageUrl] = useState('');
+
+  useEffect(()=>{
+      const storage = firebase.storage();
+      const storageRef = storage.ref();
+      const image = storageRef.child(content.imageSrc);
+      image.getDownloadURL().then(url => setImageUrl(url));
+  },[content.imageSrc]);
 
   // components
   // -> header, image, actions (like & comment icons), footer, comments
   return (
     <div className="post">
       <Header username={content.username} />
-      <img src={content.imageSrc} alt={content.caption} className="post__img"/>
+      {imgUrl ? <img src={imgUrl} alt={content.caption} className="post__img"/> : <Skeleton height="600px"/> }
       <Actions
         docId={content.docId}
         totalLikes={content.likes.length}

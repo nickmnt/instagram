@@ -6,16 +6,12 @@ import usePhotos from '../hooks/use-photos';
 import Post from './post';
 
 export default function Timeline() {
-  const { user } = useContext(LoggedInUserContext);
-  const { photos } = usePhotos(user);
+    const { user } = useContext(LoggedInUserContext);
+    const { photos } = usePhotos(user);
 
-  return (
-    <div className="dashboard__timeline">
-      {!photos ? (
-        <Skeleton count={4} width={640} height={500}/>
-      ) : (
-        photos.map((content) => <Post key={content.docId} content={content} />)
-      )}
-    </div>
-  );
+    return (
+        <div className="dashboard__timeline">
+            {!photos ? <Skeleton count={4} width={620} height={600} style={{ margin: '1rem', marginTop: '2.5rem' }} /> : photos.map((content) => <Post key={content.docId} content={content} />)}
+        </div>
+    );
 }

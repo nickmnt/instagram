@@ -42,6 +42,7 @@
     }
 
     &__img {
+        object-fit: cover;
         border-radius: 1rem;
         max-width: 60%;
         aspect-ratio: 1;

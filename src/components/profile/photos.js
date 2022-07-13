@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import Popup from '../popup';
+import Photo from './photo';
 
 export default function Photos({ username, photos }) {
   const [content, setContent] = useState(null);
@@ -15,17 +16,19 @@ export default function Photos({ username, photos }) {
     setContent(null);
   }
 
-  const handleClick = (event) => {
-        if (
-          content && (event.target.matches(".popup__close") ||
-          !event.target.closest(".popup__container"))
-        ) {
-          close()
-        }
-  }
+
 
   //Popup event handler
   useEffect(() => {
+
+    const handleClick = (event) => {
+      if (
+        content && (event.target.matches(".popup__close") ||
+        !event.target.closest(".popup__container"))
+      ) {
+        close()
+      }
+}
     
     document.addEventListener(
       "click",
@@ -48,7 +51,7 @@ export default function Photos({ username, photos }) {
           : photos.length > 0
           ? photos.map((photo) => (
               <div key={photo.docId} className="photos__photo" onClick={() => handlePhotoClick(photo)}>
-                <img src={photo.imageSrc} alt={photo.caption} className="photos__img"/>
+                <Photo photo={photo}/>
 
                 <div className="photos__stats">
                   <p className="photos__likes">
@@ -92,7 +95,7 @@ export default function Photos({ username, photos }) {
     </div>
       {
         (content) && <>
-        <a onClick={close} className="popup__close">&times;</a>
+        <button onClick={close} className="popup__close">&times;</button>
         <Popup username={username} caption={content.docId} content={content} onClick={close}/>
         </>
       }

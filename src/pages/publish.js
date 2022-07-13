@@ -1,34 +1,76 @@
-import {useState, useContext} from 'react';
+import {useState, useContext,useRef} from 'react';
 import FileInput from '../components/file-input';
 import PageTemplate from '../templates/page-template';
 import UserContext from '../context/user';
 import useUser from '../hooks/use-user';
 import { useHistory } from 'react-router-dom';
-import * as ROUTES from '../constants/routes';
+import { firebase } from '../lib/firebase';
+import Firebase from 'firebase/app';
+import { addPhoto } from '../services/firebase';
+import 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function Publish() {
+    //0 - 100
+    const [progress,setProgress] = useState(0);
+    const [isUploading, setIsUploading] = useState(false);
+    
     const history = useHistory();
+    //Get the user
     const { user: loggedInUser } = useContext(UserContext);
     const { user } = useUser(loggedInUser?.uid);
 
     const [img,setImg] = useState();
+
+    const toastId = useRef(null);
+    
     const handleSubmit = e => {
         e.preventDefault();
 
-        let formData = new FormData();
-     
-        formData.append("img", img);console.log(formData.get('img'));
-        fetch(`/images/users/${user.username}`, {method: "POST", body: formData}).then(()=> {
-            toast("Success");
-            history.push(ROUTES.DASHBOARD);
-        }).catch(()=> {
-            toast("Failed to publish post, check your internet connection.")
-        });
+        const formData = new FormData(e.target);
 
+        setIsUploading(true);
+
+        const storage = firebase.storage();
+        const storageRef = storage.ref();
+
+        const photoId = uuidv4();
+        const imageSrc = user.userId + '/' + photoId;
+        const uploadTask = storageRef.child(imageSrc).put(img);
+
+        uploadTask.on(Firebase.storage.TaskEvent.STATE_CHANGED, 
+            snapshot => {
+                var progress = Math.round((snapshot.bytesTransferred/snapshot.totalBytes))*100;
+                setProgress(progress);
+                //Toast showing progress
+                if(toastId.current === null){
+                    toastId.current = toast('Upload in Progress', {
+                    progress: progress
+                  });
+                } else {
+                  toast.update(toastId.current, {
+                    progress: progress
+                  })
+                }
+        
+            }, error => {
+                throw error;
+            }, () => {
+                toast.update(toastId.current, {
+                    render: "Publishing Post",
+                    progress: progress
+                  })
+                addPhoto(user, photoId, imageSrc, formData.get('caption'));
+                toast.done(toastId.current);
+                //Finished
+                history.push('/p/' + user.username);
+            });
     };
 
     return (
@@ -40,11 +82,11 @@ export default function Publish() {
                         Drop your picture here
                     </div>*/}
                     <div className="publish__file-input">
-                        <FileInput setImg={setImg}/>
+                        <FileInput setImg={setImg} isUploading={isUploading}/>
                     </div>
-                    {img && 
                         <>
-                        <img src={URL.createObjectURL(img)} className="publish__img" />
+                        { img && 
+                        <img src={URL.createObjectURL(img)} className="publish__img" alt="uploaded"/>}
                         <form className="edit-profile__form" onSubmit={handleSubmit}>
                             <div className="edit-profile__form-item">
                             <div className="edit-profile__input-group">
@@ -56,7 +98,6 @@ export default function Publish() {
                             </div>
                         </form>
                         </>
-                    }
                 </div>
             </div>
         </PageTemplate>

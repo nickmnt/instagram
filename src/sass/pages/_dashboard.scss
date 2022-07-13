@@ -8,9 +8,11 @@
 
     &__timeline {
         grid-column: timeline-start / timeline-end;
+        margin-bottom: 2rem;
     }
 
     &__sidebar {
+        // background-color: red;
         margin-top: 4rem;
         grid-column: sidebar-start / sidebar-end;
     }

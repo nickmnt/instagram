@@ -1,20 +1,20 @@
-import { useState, useContext, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import FirebaseContext from '../context/firebase';
-import * as ROUTES from '../constants/routes';
-import { doesUsernameExist } from '../services/firebase';
+import { useState, useContext, useEffect } from "react";
+import { Link, useHistory } from "react-router-dom";
+import FirebaseContext from "../context/firebase";
+import * as ROUTES from "../constants/routes";
+import { doesUsernameExist } from "../services/firebase";
 
 export default function SignUp() {
   const history = useHistory();
   const { firebase } = useContext(FirebaseContext);
 
-  const [username, setUsername] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
 
-  const [error, setError] = useState('');
-  const isInvalid = password === '' || emailAddress === '';
+  const [error, setError] = useState("");
+  const isInvalid = password === "" || emailAddress === "";
 
   const handleSignUp = async (event) => {
     event.preventDefault();
@@ -29,49 +29,56 @@ export default function SignUp() {
         // authentication
         // -> emailAddress & password & username (displayName)
         await createdUserResult.user.updateProfile({
-          displayName: username
+          displayName: username,
         });
 
         // firebase user collection (create a document)
         await firebase
           .firestore()
-          .collection('users')
+          .collection("users")
           .add({
             userId: createdUserResult.user.uid,
             username: username.toLowerCase(),
             fullName,
             emailAddress: emailAddress.toLowerCase(),
-            following: ['2'],
+            following: ["2"],
             followers: [],
-            dateCreated: Date.now()
+            dateCreated: Date.now(),
           });
 
         history.push(ROUTES.DASHBOARD);
       } catch (error) {
-        setFullName('');
-        setEmailAddress('');
-        setPassword('');
+        setFullName("");
+        setEmailAddress("");
+        setPassword("");
         setError(error.message);
       }
     } else {
-      setUsername('');
-      setError('That username is already taken, please try another.');
+      setUsername("");
+      setError("That username is already taken, please try another.");
     }
   };
 
   useEffect(() => {
-    document.title = 'Sign Up - Instagram';
+    document.title = "Sign Up - Instagram";
   }, []);
 
   return (
     <div className="login">
       <div className="login__container">
-        <img src="/images/iphone-with-profile.jpg" alt="iPhone with Instagram app" className="login__image" />
-        
+        <img
+          src="/images/iphone-with-profile.jpg"
+          alt="iPhone with Instagram app"
+          className="login__image"
+        />
+
         <div className="login__right">
           <div className="login__right-top">
-
-            <img src="/images/logo.png" alt="Instagram" className="login__logo" />
+            <img
+              src="/images/logo.png"
+              alt="Instagram"
+              className="login__logo"
+            />
 
             {error && <p className="login__error">{error}</p>}
 
@@ -112,7 +119,7 @@ export default function SignUp() {
                 disabled={isInvalid}
                 type="submit"
                 className={`btn login__submit
-            ${isInvalid && 'login__submit--disabled'}`}
+            ${isInvalid && "login__submit--disabled"}`}
               >
                 Sign Up
               </button>
