@@ -29,6 +29,8 @@ export default function Publish() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!img) return;
+
         const formData = new FormData(e.target);
 
         setIsUploading(true);

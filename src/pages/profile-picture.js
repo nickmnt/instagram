@@ -26,6 +26,8 @@ export default function ProfilePicture() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
+        if (!img) return;
+
         setIsUploading(true);
 
         const storage = firebase.storage();
