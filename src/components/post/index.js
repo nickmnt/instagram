@@ -13,6 +13,7 @@ export default function Post({ content }) {
     const commentInput = useRef(null);
     const handleFocus = () => commentInput.current.focus();
     const [imgUrl, setImageUrl] = useState('');
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         const storage = firebase.storage();
@@ -27,12 +28,15 @@ export default function Post({ content }) {
         setPopupContent({ content: content, username: content.username });
     };
 
+    const image = <img style={{ cursor: 'pointer', display: loaded ? 'inline-block' : 'none' }} src={imgUrl} alt={content.caption} className="post__img" onLoad={() => setLoaded(true)} onClick={handlePhotoClick} />;
+
     // components
     // -> header, image, actions (like & comment icons), footer, comments
     return (
         <div className="post">
             <Header username={content.username} content={content} />
-            {imgUrl ? <img style={{ cursor: 'pointer' }} src={imgUrl} alt={content.caption} className="post__img" onClick={handlePhotoClick} /> : <Skeleton height="600px" />}
+            {image}
+            {!(imgUrl && loaded) && <Skeleton height="600px" />}
             <Actions docId={content.docId} totalLikes={content.likes.length} likedPhoto={content.userLikedPhoto} handleFocus={handleFocus} />
             <Footer caption={content.caption} username={content.username} />
             <Comments docId={content.docId} comments={content.comments} posted={content.dateCreated} commentInput={commentInput} content={content} />
