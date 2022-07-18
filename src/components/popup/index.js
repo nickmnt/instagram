@@ -1,17 +1,20 @@
 //Post popup
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import Comment from './comment';
 import Actions from './actions';
 import Header from '../post/header';
-import { firebase } from '../../lib/firebase';
 import 'firebase/storage';
 import Skeleton from 'react-loading-skeleton';
+import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import FirebaseContext from '../../context/firebase';
 
 //User name is the username of the user that posted, content is the content of the post
-export default function Popup({ username, content }) {
+export default function Popup({ username, content, user }) {
     const [imgUrl, setImageUrl] = useState('');
     const commentInput = useRef(null);
     const [comment, setComment] = useState('');
+    const [comments, setComments] = useState(content.comments);
+    const { firebase, FieldValue } = useContext(FirebaseContext);
     //Focus to comment input when comment svg is clicked
     const handleFocus = () => commentInput.current.focus();
     console.log(content);
@@ -21,12 +24,39 @@ export default function Popup({ username, content }) {
         const storageRef = storage.ref();
         const image = storageRef.child(content.imageSrc);
         image.getDownloadURL().then((url) => setImageUrl(url));
-    }, [content.imageSrc]);
+    }, [content.imageSrc, firebase]);
+
+    const onSend = (e) => {
+        e.preventDefault();
+        const newComment = { displayName: user.username, comment };
+        setComments([...comments, newComment]);
+        setComment('');
+        return firebase
+            .firestore()
+            .collection('photos')
+            .doc(content.docId)
+            .update({
+                comments: FieldValue.arrayUnion(newComment)
+            });
+    };
 
     return (
         <div className="popup">
             <div className="popup__container" onClick={() => {}}>
-                <div className="imgContainer">{imgUrl ? <img src={imgUrl} alt={content.caption} className="popup__img" /> : <Skeleton height="600px" width="600px" className="popup__img" />}</div>
+                <div className="imgContainer">
+                    {imgUrl ? (
+                        <img
+                            src={imgUrl}
+                            alt={content.caption}
+                            className="popup__img"
+                            onError={(e) => {
+                                e.target.src = DEFAULT_IMAGE_PATH;
+                            }}
+                        />
+                    ) : (
+                        <Skeleton height="600px" width="600px" className="popup__img" />
+                    )}
+                </div>
 
                 <div className="popup__sidebar">
                     <div className="popup__header">
@@ -44,13 +74,20 @@ export default function Popup({ username, content }) {
 
                     <div className="popup__comments">
                         <div className="comment popup__caption">
-                            <img src={`/images/avatars/${username}.jpg`} alt="User" className="comment__img" />
+                            <img
+                                src={`/images/avatars/${username}.jpg`}
+                                alt="User"
+                                className="comment__img"
+                                onError={(e) => {
+                                    e.target.src = DEFAULT_IMAGE_PATH;
+                                }}
+                            />
                             <p className="comment__txt">
                                 <span className="comment__name">{username}</span>
                                 {content.caption}
                             </p>
                         </div>
-                        {content.comments.map((comment) => (
+                        {comments.map((comment) => (
                             <Comment comment={comment.comment} displayName={comment.displayName} />
                         ))}
                     </div>
@@ -59,7 +96,7 @@ export default function Popup({ username, content }) {
                         <Actions docId={content.docId} totalLikes={content.likes.length} likedPhoto={content.userLikedPhoto} handleFocus={handleFocus} datePosted={content.dateCreated} />
                     </div>
 
-                    <form action="" className="popup__add">
+                    <form className="popup__add" onSubmit={(event) => (comment.length >= 1 ? onSend(event) : event.preventDefault())}>
                         <input
                             type="text"
                             className="add-comment__input popup__input"

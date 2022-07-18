@@ -32,4 +32,12 @@
         text-transform: uppercase;
     }
 
+    &__more {
+        margin: 0.5rem 0;
+        font-weight: 600;
+        font-size: 1.4rem;
+        color: $color-grey-dark-1;
+        cursor: pointer;
+    }
+
 }

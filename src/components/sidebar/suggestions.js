@@ -6,47 +6,40 @@ import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './suggested-profile';
 
 export default function Suggestions({ userId, following, loggedInUserDocId }) {
-  const [profiles, setProfiles] = useState(null);
+    const [profiles, setProfiles] = useState(null);
 
-  useEffect(() => {
-    async function suggestedProfiles() {
-      const response = await getSuggestedProfiles(userId, following);
-      setProfiles(response);
-    }
+    useEffect(() => {
+        async function suggestedProfiles() {
+            const response = await getSuggestedProfiles(userId, following);
+            setProfiles(response);
+        }
 
-    if (userId) {
-      suggestedProfiles();
-    }
-  }, [userId]);
-  // hint: use the firebase service (call using userId)
-  // getSuggestedProfiles
-  // call the async function ^^^^ within useEffect
-  // store it in state
-  // go ahead and render (wait on the profiles as in 'skeleton')
+        if (userId) {
+            suggestedProfiles();
+        }
+    }, [userId, following]);
+    // hint: use the firebase service (call using userId)
+    // getSuggestedProfiles
+    // call the async function ^^^^ within useEffect
+    // store it in state
+    // go ahead and render (wait on the profiles as in 'skeleton')
 
-  return !profiles ? (
-    <Skeleton count={1} height={150} />
-  ) : profiles.length > 0 ? (
-    <div className="suggestions">
-      <p className="suggestions__text">Suggestions For You</p>
-      <div className="suggestions__container">
-        {profiles.map((profile) => (
-          <SuggestedProfile
-            key={profile.docId}
-            profileDocId={profile.docId}
-            username={profile.username}
-            profileId={profile.userId}
-            userId={userId}
-            loggedInUserDocId={loggedInUserDocId}
-          />
-        ))}
-      </div>
-    </div>
-  ) : null;
+    return !profiles ? (
+        <Skeleton count={1} height={150} />
+    ) : profiles.length > 0 ? (
+        <div className="suggestions">
+            <p className="suggestions__text">Suggestions For You</p>
+            <div className="suggestions__container">
+                {profiles.map((profile) => (
+                    <SuggestedProfile key={profile.docId} profileDocId={profile.docId} username={profile.username} profileId={profile.userId} userId={userId} loggedInUserDocId={loggedInUserDocId} />
+                ))}
+            </div>
+        </div>
+    ) : null;
 }
 
 Suggestions.propTypes = {
-  userId: PropTypes.string,
-  following: PropTypes.array,
-  loggedInUserDocId: PropTypes.string
+    userId: PropTypes.string,
+    following: PropTypes.array,
+    loggedInUserDocId: PropTypes.string
 };
