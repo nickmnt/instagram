@@ -7,6 +7,7 @@ import { DEFAULT_IMAGE_PATH } from '../constants/paths';
 import useUser from '../hooks/use-user';
 import Search from './search';
 import SearchResult from './search-result';
+import { constructMediaUrl } from '../services/firebase';
 
 export default function Header() {
     const { user: loggedInUser } = useContext(UserContext);
@@ -83,7 +84,7 @@ export default function Header() {
                                     <Link to={`/p/${user?.username}`}>
                                         <img
                                             className="navigation__pic"
-                                            src={`/images/avatars/${user?.username}.jpg`}
+                                            src={constructMediaUrl(user?.username)}
                                             alt={`${user?.username} profile`}
                                             onError={(e) => {
                                                 e.target.src = DEFAULT_IMAGE_PATH;

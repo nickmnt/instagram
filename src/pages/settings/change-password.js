@@ -3,7 +3,7 @@ import SettingsTemplate from '../../templates/settings-template';
 import UserContext from '../../context/user';
 import useUser from '../../hooks/use-user';
 import Skeleton from 'react-loading-skeleton';
-import { changePassword } from '../../services/firebase';
+import { changePassword, constructMediaUrl } from '../../services/firebase';
 
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -37,7 +37,18 @@ export default function ChangePassword() {
             <ToastContainer />
             <div className="edit-profile">
                 <div className="edit-profile__photo-container">
-                    {user ? <img src={`/images/avatars/${user.username}.jpg`} alt="User" className="edit-profile__img" /> : <Skeleton />}
+                    {user ? (
+                        <img
+                            src={constructMediaUrl(user.username)}
+                            alt="User"
+                            className="edit-profile__img"
+                            onError={(e) => {
+                                e.target.src = `/images/avatars/default.png`;
+                            }}
+                        />
+                    ) : (
+                        <Skeleton />
+                    )}
                     {user ? <div className="edit-profile__name">{user.username}</div> : <Skeleton />}
                 </div>
 

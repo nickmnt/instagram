@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import PopupMenu from '../popup-menu';
 import { useEffect, useState } from 'react';
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import { constructMediaUrl } from '../../services/firebase';
 
 export default function Header({ username, content }) {
     const [open, setOpen] = useState(false);
@@ -27,7 +28,7 @@ export default function Header({ username, content }) {
             <div className="p-header">
                 <Link to={`/p/${username}`} className="p-header__link">
                     <img
-                        src={`/images/avatars/${username}.jpg`}
+                        src={constructMediaUrl(username)}
                         alt={`${username} profile picture`}
                         className="p-header__img"
                         onError={(e) => {

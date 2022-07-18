@@ -11,7 +11,7 @@ export default function Timeline() {
 
     return (
         <div className="dashboard__timeline">
-            {!photos ? <Skeleton count={4} width={620} height={600} style={{ margin: '1rem', marginTop: '2.5rem' }} /> : photos.map((content) => <Post key={content.docId} content={content} />)}
+            {!photos ? <Skeleton count={4} width={575} height={600} style={{ margin: '1rem', marginTop: '2.5rem' }} /> : photos.map((content) => <Post key={content.docId} content={content} />)}
         </div>
     );
 }

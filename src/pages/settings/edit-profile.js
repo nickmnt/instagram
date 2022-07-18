@@ -3,8 +3,11 @@ import SettingsTemplate from '../../templates/settings-template';
 import UserContext from '../../context/user';
 import useUser from '../../hooks/use-user';
 import Skeleton from 'react-loading-skeleton';
-import { updateUserDetails } from '../../services/firebase';
+import { constructMediaUrl, updateUserDetails } from '../../services/firebase';
 import { toast } from 'react-toastify';
+import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import { Link } from 'react-router-dom';
+import * as ROUTES from '../../constants/routes';
 
 export default function EditProfile() {
     const { user: loggedInUser } = useContext(UserContext);
@@ -48,9 +51,22 @@ export default function EditProfile() {
         <SettingsTemplate>
             <div className="edit-profile">
                 <div className="edit-profile__photo-container">
-                    {user ? <img src={`/images/avatars/${user.username}.jpg`} alt="User" className="edit-profile__img" /> : <Skeleton />}
+                    {user ? (
+                        <img
+                            src={constructMediaUrl(user.username)}
+                            alt="User"
+                            className="edit-profile__img"
+                            onError={(e) => {
+                                e.target.src = DEFAULT_IMAGE_PATH;
+                            }}
+                        />
+                    ) : (
+                        <Skeleton />
+                    )}
                     {user ? <div className="edit-profile__name">{user.username}</div> : <Skeleton />}
-                    <button className="btn-simple edit-profile__photo-btn">Change Profile Photo</button>
+                    <Link to={ROUTES.PROFILE_PICTURE}>
+                        <button className="btn-simple edit-profile__photo-btn">Change Profile Photo</button>
+                    </Link>
                 </div>
 
                 {user && (

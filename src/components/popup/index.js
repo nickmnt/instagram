@@ -7,6 +7,7 @@ import 'firebase/storage';
 import Skeleton from 'react-loading-skeleton';
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 import FirebaseContext from '../../context/firebase';
+import { constructMediaUrl } from '../../services/firebase';
 
 //User name is the username of the user that posted, content is the content of the post
 export default function Popup({ username, content, user }) {
@@ -75,7 +76,7 @@ export default function Popup({ username, content, user }) {
                     <div className="popup__comments">
                         <div className="comment popup__caption">
                             <img
-                                src={`/images/avatars/${username}.jpg`}
+                                src={constructMediaUrl(username)}
                                 alt="User"
                                 className="comment__img"
                                 onError={(e) => {

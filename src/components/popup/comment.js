@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom';
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
+import { constructMediaUrl } from '../../services/firebase';
 
 export default function Comment({ comment, displayName }) {
     return (
         <div className="comment">
             <img
-                src={`/images/avatars/${displayName}.jpg`}
+                src={constructMediaUrl(displayName)}
                 alt="User"
                 className="comment__img"
                 onError={(e) => {

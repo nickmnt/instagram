@@ -1,4 +1,4 @@
-import { firebase, FieldValue } from '../lib/firebase';
+import { firebase, FieldValue, config } from '../lib/firebase';
 
 /**
  *
@@ -252,4 +252,8 @@ export const addPhoto = async (user, photoId, imageSrc, caption) => {
         userLongitude: '74.0060°',
         dateCreated: Date.now()
     });
+};
+
+export const constructMediaUrl = (x) => {
+    return `https://firebasestorage.googleapis.com/v0/b/${config.projectId}.appspot.com/o/avatars%2F${x}.jpg?alt=media`;
 };

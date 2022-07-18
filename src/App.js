@@ -14,6 +14,7 @@ import ChangePassword from './pages/settings/change-password';
 import Publish from './pages/publish';
 import ContentContext from './context/content';
 import Popup from './components/popup';
+import ProfilePicture from './pages/profile-picture';
 
 const Login = lazy(() => import('./pages/login'));
 const SignUp = lazy(() => import('./pages/sign-up'));
@@ -75,6 +76,7 @@ export default function App() {
                                     <Route path={ROUTES.LOGIN} component={Login} />
                                     <Route path={ROUTES.SIGN_UP} component={SignUp} />
                                     <Route path={ROUTES.POST} component={Publish} />
+                                    <Route path={ROUTES.PROFILE_PICTURE} component={ProfilePicture} />
                                     <Route path={ROUTES.PROFILE} component={Profile} />
                                     <Route component={NotFound} />
                                 </Switch>

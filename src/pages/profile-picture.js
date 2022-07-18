@@ -6,14 +6,11 @@ import useUser from '../hooks/use-user';
 import { useHistory } from 'react-router-dom';
 import { firebase } from '../lib/firebase';
 import Firebase from 'firebase/app';
-import { addPhoto } from '../services/firebase';
 import 'firebase/storage';
-import { v4 as uuidv4 } from 'uuid';
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-export default function Publish() {
+export default function ProfilePicture() {
     //0 - 100
     const [isUploading, setIsUploading] = useState(false);
 
@@ -29,15 +26,13 @@ export default function Publish() {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const formData = new FormData(e.target);
-
         setIsUploading(true);
 
         const storage = firebase.storage();
         const storageRef = storage.ref();
 
-        const photoId = uuidv4();
-        const imageSrc = user.userId + '/' + photoId;
+        const imageSrc = `avatars/${user.username}.jpg`;
+        console.log(imageSrc);
         const uploadTask = storageRef.child(imageSrc).put(img);
 
         uploadTask.on(
@@ -60,13 +55,13 @@ export default function Publish() {
             },
             () => {
                 toast.update(toastId.current, {
-                    render: 'Post published',
+                    render: 'Profile picture updated.',
                     progress: 0,
                     type: 'success'
                 });
-                addPhoto(user, photoId, imageSrc, formData.get('caption'));
                 //Finished
                 history.push('/p/' + user.username);
+                window.location.reload(false);
             }
         );
     };
@@ -85,15 +80,10 @@ export default function Publish() {
                     <>
                         {img && <img src={URL.createObjectURL(img)} className="publish__img" alt="uploaded" />}
                         <form className="edit-profile__form" onSubmit={handleSubmit}>
-                            <div className="edit-profile__form-item">
-                                <div className="edit-profile__input-group">
-                                    <input type="text" className="edit-profile__input" placeholder="Caption" name="caption" />
-                                    <label className="edit-profile__title">Caption</label>
-                                </div>
-                            </div>
-                            <div className="edit-profile__form-item">
-                                <button className="btn edit-profile__submit">Post</button>
-                            </div>
+                            <p style={{ fontSize: '1.4rem' }}>Click update to use your new profile picture.</p>
+                            <button className="btn" style={{ padding: '0 .5rem', marginTop: '1rem' }}>
+                                Update
+                            </button>
                         </form>
                     </>
                 </div>

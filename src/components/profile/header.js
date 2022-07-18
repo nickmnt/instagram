@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import useUser from '../../hooks/use-user';
-import { isUserFollowingProfile, toggleFollow } from '../../services/firebase';
+import { constructMediaUrl, isUserFollowingProfile, toggleFollow } from '../../services/firebase';
 import UserContext from '../../context/user';
 import { DEFAULT_IMAGE_PATH } from '../../constants/paths';
 import { Link } from 'react-router-dom';
@@ -46,7 +46,7 @@ export default function Header({
                     <img
                         className="prof-header__img"
                         alt={`${fullName} profile picture`}
-                        src={`/images/avatars/${profileUsername}.jpg`}
+                        src={constructMediaUrl(profileUsername)}
                         onError={(e) => {
                             e.target.src = DEFAULT_IMAGE_PATH;
                         }}
