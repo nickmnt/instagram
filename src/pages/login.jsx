@@ -70,7 +70,7 @@ export default function Login() {
             </button>
           </form>
         </div>
-        <div className="login__signup">
+        <div className="login__signup invisible">
           <p className="login__text">
             Don't have an account?{` `}
             <Link to={ROUTES.SIGN_UP} className="login__link">
