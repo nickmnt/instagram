@@ -1,8 +1,52 @@
-# React + Vite
+# Instagram Clone Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the Instagram Clone project! This project aims to replicate the core features of the popular photo-sharing platform Instagram using React, npm, and Vite. 
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Features](#features)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Features
+
+- [x] User Authentication
+- [x] Post Creation and Sharing
+- [x] Like and Comment on Posts
+- [x] User Profiles
+- [x] Follow and Unfollow Users
+- [x] Explore and Discover Posts
+
+## Demo
+
+To be continued
+
+## Installation
+
+To get started with the project, follow these steps:
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/your-username/instagram-clone.git
+   ```
+
+2. Run this command (based on https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported)
+
+   ```bash
+   export NODE_OPTIONS=--openssl-legacy-provider
+   ```
+
+3. Install the dependencies
+
+   ```bash
+   npm install
+   ```
+4. Run the project
+
+   ```bash
+   npm run dev
+   ```
