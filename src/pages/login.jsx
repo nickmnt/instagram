@@ -35,7 +35,7 @@ export default function Login() {
     <div className="login">
       
     <div className="login__container">
-      <img src="/images/iphone-with-profile.jpg" alt="iPhone with Instagram app" className="login__image"/>
+      <img src="images/iphone-with-profile.jpg" alt="iPhone with Instagram app" className="login__image"/>
       <div className="login__right">
         <div className="login__right-top">
 

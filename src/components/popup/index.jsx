@@ -63,7 +63,7 @@ export default function Popup({ username, content, user }) {
                     <div className="popup__header">
                         {/*<Link to={`/p/${username}`} className="popup__header-link">
                             <img
-                                src={`/images/avatars/${username}.jpg`}
+                                src={`images/avatars/${username}.jpg`}
                                 alt={`${username} profile picture`}
                                 className="popup__header-img"
                             />
