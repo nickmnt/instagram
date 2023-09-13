@@ -39,7 +39,7 @@ export default function Login() {
       <div className="login__right">
         <div className="login__right-top">
 
-          <img src="/images/logo.png" alt="Instagram" className="login__logo" />
+          <img src="images/logo.png" alt="Instagram" className="login__logo" />
 
           {error && <p className="login__error">{error}</p>}
 
