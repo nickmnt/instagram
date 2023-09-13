@@ -52,7 +52,7 @@ export default function App() {
             <ContentContext.Provider value={{ setPopupContent }}>
                 <UserContext.Provider value={{ user }}>
                     <TermProvider>
-                        <Router basename="/instagram/">
+                        <Router>
                             <Suspense fallback={<ReactLoader />}>
                                 <Switch>
                                     <ProtectedRoute user={user} path={ROUTES.DASHBOARD} exact>
