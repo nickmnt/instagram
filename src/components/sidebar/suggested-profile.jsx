@@ -24,7 +24,7 @@ export default function SuggestedProfile({ profileDocId, username, profileId, us
                     src={constructMediaUrl(username)}
                     alt=""
                     onError={(e) => {
-                        e.target.src = `/images/avatars/default.png`;
+                        e.target.src = `images/avatars/default.png`;
                     }}
                 />
                 <Link to={`/p/${username}`} className="sug-profile__link">

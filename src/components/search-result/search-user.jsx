@@ -22,7 +22,7 @@ export default function SearchUser({ username, fullName }) {
                         alt="User"
                         className="search-user__img"
                         onError={(e) => {
-                            e.target.src = `/images/avatars/default.png`;
+                            e.target.src = `images/avatars/default.png`;
                         }}
                     />
                     <div className="search-user__group">

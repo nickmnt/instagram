@@ -43,7 +43,7 @@ export default function ChangePassword() {
                             alt="User"
                             className="edit-profile__img"
                             onError={(e) => {
-                                e.target.src = `/images/avatars/default.png`;
+                                e.target.src = `images/avatars/default.png`;
                             }}
                         />
                     ) : (
