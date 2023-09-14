@@ -35,11 +35,11 @@ export default function Login() {
     <div className="login">
       
     <div className="login__container">
-      <img src={import.meta.env.BASE_URL + "images/iphone-with-profile.jpg"} alt="iPhone with Instagram app" className="login__image"/>
-      <div className="login__right">
+      <img src={import.meta.env.BASE_URL + "images/iphone-with-profile.jpg"} alt="iPhone with Instagram app" className="login__image hidden md:inline-block w-xl h-2.5xl"/>
+      <div className="login__right w-lg mr-10">
         <div className="login__right-top">
 
-          <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Instagram" className="login__logo" />
+          <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Instagram" className="login__logo mx-36" />
 
           {error && <p className="login__error">{error}</p>}
 
@@ -47,7 +47,7 @@ export default function Login() {
             <input
               aria-label="Enter your email address"
               type="text"
-              placeholder="Phone number, username or email"
+              placeholder="Email"
               className="login__input"
               onChange={({ target }) => setEmailAddress(target.value)}
               value={emailAddress}
@@ -70,7 +70,7 @@ export default function Login() {
             </button>
           </form>
         </div>
-        <div className="login__signup invisible">
+        <div className="login__signup">
           <p className="login__text">
             Don't have an account?{` `}
             <Link to={ROUTES.SIGN_UP} className="login__link">

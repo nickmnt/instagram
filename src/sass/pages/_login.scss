@@ -12,13 +12,7 @@
 
 
     &__container {
-        width: 93rem;
         display: flex;
-    }
-
-    &__image {
-        width: 50%;
-        height: 618px;
     }
 
     &__right {
@@ -62,8 +56,6 @@
         margin-top: 3rem;
         margin-bottom: 3rem;
         flex: 0 0;
-        width: auto;
-        height: auto;
     }
 
     &__error {

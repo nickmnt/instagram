@@ -69,15 +69,15 @@ export default function SignUp() {
         <img
           src={import.meta.env.BASE_URL + "images/iphone-with-profile.jpg"}
           alt="iPhone with Instagram app"
-          className="login__image"
+          className="login__image hidden md:inline-block w-xl h-2.5xl"
         />
 
-        <div className="login__right">
+        <div className="login__right w-lg mr-10">
           <div className="login__right-top">
             <img
               src={import.meta.env.BASE_URL + "images/logo.png"}
               alt="Instagram"
-              className="login__logo"
+              className="login__logo mx-36"
             />
 
             {error && <p className="login__error">{error}</p>}
