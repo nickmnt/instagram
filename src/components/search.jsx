@@ -18,7 +18,7 @@ export default function Search() {
     }, [focused, setFocused]);
 
     return (
-        <form action="" className="search">
+        <form action="" className="search hidden md:flex">
             <input
                 type="text"
                 className={`search__input ${focused && 'search__input--focused'}`}
