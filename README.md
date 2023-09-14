@@ -7,9 +7,6 @@ Welcome to the Instagram Clone project! This project aims to replicate the core 
 - [Features](#features)
 - [Demo](#demo)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -22,7 +19,7 @@ Welcome to the Instagram Clone project! This project aims to replicate the core 
 
 ## Demo
 
-To be continued
+**[Link to demo](https://nimamt.github.io/instagram/)**
 
 ## Installation
 
@@ -31,7 +28,7 @@ To get started with the project, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/instagram-clone.git
+   git clone https://github.com/nimamt/instagram.git
    ```
 
 2. Run this command (based on https://stackoverflow.com/questions/69394632/webpack-build-failing-with-err-ossl-evp-unsupported)
