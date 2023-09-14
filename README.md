@@ -7,9 +7,6 @@ Welcome to the Instagram Clone project! This project aims to replicate the core 
 - [Features](#features)
 - [Demo](#demo)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -22,7 +19,7 @@ Welcome to the Instagram Clone project! This project aims to replicate the core 
 
 ## Demo
 
-To be continued
+**[Link to demo](https://nimamt.github.io/instagram/)**
 
 ## Installation
 
