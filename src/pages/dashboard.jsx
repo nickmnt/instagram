@@ -13,8 +13,8 @@ export default function Dashboard({ user: loggedInUser }) {
         <PageTemplate>
             <div className="dashboard">
                 <div className="dashboard__container">
-                    <Timeline className="dashboard__timeline" />
-                    <Sidebar className="dashboard__sidebar" />
+                    <Timeline/>
+                    <Sidebar/>
                 </div>
             </div>
         </PageTemplate>

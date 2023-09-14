@@ -10,7 +10,7 @@ export default function Timeline() {
     const { photos } = usePhotos(user);
 
     return (
-        <div className="dashboard__timeline">
+        <div className="dashboard__timeline inline-block">
             {!photos ? <Skeleton count={4} width={575} height={600} style={{ margin: '1rem', marginTop: '2.5rem' }} /> : photos.map((content) => <Post key={content.docId} content={content} />)}
         </div>
     );
