@@ -1,1 +1,1 @@
-export const DEFAULT_IMAGE_PATH = '/images/avatars/default.png';
+export const DEFAULT_IMAGE_PATH = import.meta.env.BASE_URL + 'images/avatars/default.png';

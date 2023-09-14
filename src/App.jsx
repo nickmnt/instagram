@@ -23,7 +23,9 @@ const Profile = lazy(() => import('./pages/profile'));
 const NotFound = lazy(() => import('./pages/not-found'));
 const EditProfile = lazy(() => import('./pages/settings/edit-profile'));
 
+
 export default function App() {
+
     const { user } = useAuthListener();
     const [popupContent, setPopupContent] = useState(null);
     const close = () => {

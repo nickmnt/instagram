@@ -22,7 +22,7 @@ export default function Header() {
                 <div className="navigation__container">
                     <div className="navigation__logo">
                         <Link to={ROUTES.DASHBOARD} aria-label="Instagram logo">
-                            <img src="/images/logo.png" alt="Instagram" className="navigation__logo-img" />
+                            <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Instagram" className="navigation__logo-img" />
                         </Link>
                     </div>
                     <Search className="navigation__search" />

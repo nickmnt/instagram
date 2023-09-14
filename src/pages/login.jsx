@@ -35,11 +35,11 @@ export default function Login() {
     <div className="login">
       
     <div className="login__container">
-      <img src="images/iphone-with-profile.jpg" alt="iPhone with Instagram app" className="login__image"/>
+      <img src={import.meta.env.BASE_URL + "images/iphone-with-profile.jpg"} alt="iPhone with Instagram app" className="login__image"/>
       <div className="login__right">
         <div className="login__right-top">
 
-          <img src="images/logo.png" alt="Instagram" className="login__logo" />
+          <img src={import.meta.env.BASE_URL + "images/logo.png"} alt="Instagram" className="login__logo" />
 
           {error && <p className="login__error">{error}</p>}
 
