@@ -9,7 +9,7 @@ export default function Sidebar() {
   );
 
   return (
-    <div className="dashboard__sidebar">
+    <div className="dashboard__sidebar hidden md:inline-block">
       <User username={username} fullName={fullName} />
       <Suggestions userId={userId} following={following} loggedInUserDocId={docId} />
     </div>
