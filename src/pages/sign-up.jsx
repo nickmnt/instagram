@@ -72,7 +72,7 @@ export default function SignUp() {
           className="login__image hidden md:inline-block w-xl h-2.5xl"
         />
 
-        <div className="login__right w-lg mr-10">
+        <div className="login__right w-lg md:mr-10">
           <div className="login__right-top">
             <img
               src={import.meta.env.BASE_URL + "images/logo.png"}
