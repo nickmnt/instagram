@@ -14,7 +14,7 @@ export default function PopupMenu({ content }) {
 
     return (
         <div className="popup-menu">
-            <div className="popup-menu__container">
+            <div className="popup-menu__container mx-5">
                 <div className="popup-menu__item popup-menu__item-red noselect">Report</div>
                 <div className="popup-menu__item popup-menu__item-red noselect" onClick={() => unfollow()}>
                     Unfollow

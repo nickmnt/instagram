@@ -44,7 +44,7 @@ export default function Header({
             <div className="prof-header__img-container">
                 {profileUsername ? (
                     <img
-                        className="prof-header__img"
+                        className="prof-header__img w-50 mr-5 sm:mr-0 md:w-60 md:w-60 xl:w-72 xl:h-72"
                         alt={`${fullName} profile picture`}
                         src={constructMediaUrl(profileUsername)}
                         onError={(e) => {
@@ -56,8 +56,8 @@ export default function Header({
                 )}
             </div>
             <div className="prof-header__mid">
-                <div className="prof-header__mid-top">
-                    <p className="prof-header__title">{profileUsername}</p>
+                <div className="prof-header__mid-top w-full">
+                    <p className="prof-header__title text-3xl lg:text-4xl xl:text-5xl">{profileUsername}</p>
                     {activeBtnFollow && isFollowingProfile === null ? (
                         <Skeleton count={1} width={80} height={32} />
                     ) : (
@@ -77,14 +77,16 @@ export default function Header({
                         )
                     )}
                     {!activeBtnFollow && activeBtnFollow !== undefined && (
-                        <Link role="button" className="btn-edit" to={ROUTES.EDIT_PROFILE}>
+                        <Link role="button" className="btn-edit text-sm md:text-lg lg:text-xl" to={ROUTES.EDIT_PROFILE}>
                             Edit Profile
                         </Link>
                     )}
                 </div>
-                <div className="prof-header__info">
+                <div className="prof-header__info w-full">
                     {!followers || !following ? (
-                        <Skeleton count={1} width={677} height={24} />
+                        <div className="w-1/2 lg:w-1/3">
+                            <Skeleton count={1} style={{width:'100%'}} height={24} />
+                        </div>
                     ) : (
                         <>
                             <p className="prof-header__text">
