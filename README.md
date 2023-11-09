@@ -23,7 +23,7 @@ Welcome to the Instagram Clone project! This project aims to replicate the core 
 
 ## Demo
 
-**[Link to demo](https://nimamt.github.io/instagram/)**
+**[Link to demo](https://nickmnt.github.io/instagram/)**
 
 ## Installation
 
