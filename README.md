@@ -1,8 +1,17 @@
 # Instagram Clone Project
 
-<h2 align="center">
-  <a href="https://photos.app.goo.gl/yGu5cVv2H1wEM4PQ8">📷 𝙲𝚕𝚒𝚌𝚔 𝚝𝚘 𝚜𝚎𝚎 𝚜𝚌𝚛𝚎𝚎𝚗𝚜𝚑𝚘𝚝𝚜</a>
-</h2>
+## 📷 Screenshots
+
+<details>
+  <summary>Screenshots (Hidden) - Click to open!</summary>
+  <img src="https://github.com/nickmnt/instagram/blob/master/screenshots/Comment.png?raw=true" alt="Screenshot"></img>
+  <img src="https://github.com/nickmnt/instagram/blob/master/screenshots/Homepage.png?raw=true" alt="Screenshot"></img>
+  <img src="https://github.com/nickmnt/instagram/blob/master/screenshots/Login.png?raw=true" alt="Screenshot"></img>
+  <img src="https://github.com/nickmnt/instagram/blob/master/screenshots/PostExtra.png?raw=true" alt="Screenshot"></img>
+  <img src="https://github.com/nickmnt/instagram/blob/master/screenshots/ProfilePost.png?raw=true" alt="Screenshot"></img>
+</details>
+
+## Summary
 
 Welcome to the Instagram Clone project! This project aims to replicate the core features of the popular photo-sharing platform Instagram using React, npm, and Vite. 
 
